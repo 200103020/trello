@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:include="~{/stable/head.html}"></div>
+<body>
+<div th:include="~{/stable/navbar.html}"></div>
+<div class="container">
+    <div th:include="~{/categories.html}"></div>
+    <div th:include="~{/stable/modal.html}"></div>
+    <input type="hidden" name="id" class="form-control" th:value="${taskDashFolder.getId()}">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="taskDashFolder, iterStat : ${taskDash}">
+                <td th:text="${iterStat.count}"></td>
+                <td th:text="${taskDashFolder.getTitle()}"></td>
+                <td style="font-weight: bold">
+                    <span th:if="${taskDashFolder.getStatus()==0}" style="color: blue">To Do</span>
+                    <span th:if="${taskDashFolder.getStatus()==1}" style="color: #ff9b00">In Test</span>
+                    <span th:if="${taskDashFolder.getStatus()==2}" style="color: green">Done</span>
+                    <span th:if="${taskDashFolder.getStatus()==3}" style="color: red">Failed</span>
+                </td>
+                <td style="width: 13%;">
+                    <a th:href="@{'/main/detailTask/' + ${taskDashFolder.getId()}}" style="background-color: royalblue; color: #fff; width: 68%; display: block;
+                                      padding: 6px 0;
+                                      align-items: center;
+                                      text-align: center;
+                                      text-decoration: none;
+                                      border-radius: 8px;">View More
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</html>

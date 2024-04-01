@@ -1,0 +1,108 @@
+<div th:if="${folders}">
+    <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        +New Folder
+    </button>
+    <div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form th:action="@{'/main/addFolder'}" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Folder</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea  name="folder" class="form-control mt-3" placeholder="Write Folder Name..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Add Folder</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div th:if="${taskDash}">
+    <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+        +New Task
+    </button>
+    <div class="modal fade" id="exampleModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form th:action="@{'/main/addTask'}" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel4">Add Task</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="hidden" name="id" class="form-control" th:value="${taskDashFolder.getId()}">
+                            <label>Title:</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Description:</label>
+                            <input type="text" name="description" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:if="${taskDetail}">
+    <div th:if="${taskDetail.getStatus() == 0}">
+        <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF; margin: 0 0 10px 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+            Add Comment
+        </button>
+    </div>
+    <div th:if="${taskDetail.getStatus() == 1}">
+        <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF; margin: 0 0 10px 10px;" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+            Add Comment
+        </button>
+    </div>
+    <div th:if="${taskDetail.getStatus() == 2}">
+        <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF; margin: 0 0 10px 10px; display: none" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+            Add Comment
+        </button>
+    </div>
+    <div th:if="${taskDetail.getStatus() == 3}">
+        <button type="button" class="btn btn-warning mt-3" style="color: #FFFFFF; margin: 0 0 10px 10px; display: none" data-bs-toggle="modal" data-bs-target="#exampleModal5">
+            Add Comment
+        </button>
+    </div>
+    <div class="modal fade" id="exampleModal5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form th:action="@{'/main/addComment'}" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel5">Comment section</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" class="form-control" th:value="${taskDetail.getId()}">
+                        <textarea name="comment" class="form-control mt-3" placeholder="Write comment here...">
+                        </textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
