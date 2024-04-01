@@ -52,10 +52,10 @@ public class TrelloController {
         Folders folders = folderRepository.findById(folder_Id).orElseThrow();
         List<Tasks> tasks = taskRepository.findByFolder(folders);
         for(Tasks tasks1 : tasks){
-            taskRepository.delete(tasks1);
             List<Comments> comments = commentRepository.findByTask(tasks1);
             for (Comments comments1 : comments){
                 commentRepository.delete(comments1);
+                taskRepository.delete(tasks1);
             }
         }
         folderRepository.delete(folders);
